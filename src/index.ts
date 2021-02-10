@@ -4,6 +4,7 @@ import cheerio from 'cheerio';
 import UserAgent from 'user-agents';
 import {
   IllustDetailsResponse,
+  IllustPagesResponse,
   LoginResponse,
   UgoiraMetaDataResponse,
 } from './ResponseTypes';
@@ -180,10 +181,10 @@ class PixivWeb {
     return Promise.resolve(response);
   }
 
-  async illustPages(id: string | number) {
+  async illustPages(id: string | number): Promise<IllustPagesResponse {
     const url = `${WEB_API_URL}/illust/${id}/pages`;
 
-    const response = await got
+    const response: IllustPagesResponse = await got
       .get(url, {
         headers: {
           'User-Agent': this.userAgent,

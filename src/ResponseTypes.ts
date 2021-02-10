@@ -45,6 +45,21 @@ export interface IllustDetailsResponse extends BaseResponse {
   };
 }
 
+export interface IllustPagesResponse extends BaseResponse {
+  body?: Array<IllustPages>;
+}
+
+export interface IllustPages {
+  urls: {
+    thumb_mini: string;
+    small: string;
+    regular: string;
+    original: string;
+  };
+  width: number;
+  height: number;
+}
+
 export interface UgoiraMetaDataResponse extends BaseResponse {
   body?: {
     frames: Array<UgoiraFrame>;
