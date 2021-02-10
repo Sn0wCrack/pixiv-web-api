@@ -2,6 +2,12 @@ import got, { Response } from 'got/dist/source';
 import { Cookie, CookieJar } from 'tough-cookie';
 import cheerio from 'cheerio';
 import UserAgent from 'user-agents';
+import {
+  IllustDetailsResponse,
+  LoginResponse,
+  UgoiraMetaDataResponse,
+} from './ResponseTypes';
+import { AuthData, Options } from './ApiTypes';
 
 const BASE_URL = 'https://www.pixiv.net';
 const LOGIN_PAGE_URL = 'https://accounts.pixiv.net/login';
@@ -249,78 +255,6 @@ class PixivWeb {
     const userAgent = new UserAgent({ deviceCategory: 'desktop' });
     return userAgent.toString();
   }
-}
-
-interface AuthData {
-  username?: string;
-  password?: string;
-  cookie?: string;
-}
-
-interface Options {
-  userAgent?: string;
-  locale?: string;
-}
-
-interface BaseResponse {
-  error?: boolean;
-  message?: string;
-  body?: {};
-}
-
-interface LoginResponse extends BaseResponse {
-  body?: {
-    validation_errors?: {
-      captcha?: string;
-    };
-  };
-}
-
-interface IllustDetailsResponse extends BaseResponse {
-  body?: {
-    illustId: string;
-    illustTitle: string;
-    illustComment: string;
-    id: string;
-    title: string;
-    description: string;
-    illustType: number;
-    createdDate: string;
-    uploadDate: string;
-    urls: {
-      mini: string;
-      thumb: string;
-      small: string;
-      regular: string;
-      original: string;
-    };
-    userId: string;
-    userName: string;
-    userAccount: string;
-    width: number;
-    height: number;
-    pageCount: number;
-    likeCount: number;
-    viewCount: number;
-    isOriginal: boolean;
-    extraData: {
-      meta?: {};
-    };
-  };
-}
-
-interface UgoiraMetaDataResponse extends BaseResponse {
-  body?: {
-    frames: Array<UgoiraFrame>;
-    mime_type: string;
-    originalSrc: string;
-    src: string;
-  };
-}
-
-interface UgoiraFrame {
-  file: string;
-  delay: number;
 }
 
 export default PixivWeb;
