@@ -181,7 +181,7 @@ class PixivWeb {
     return Promise.resolve(response);
   }
 
-  async illustPages(id: string | number): Promise<IllustPagesResponse {
+  async illustPages(id: string | number): Promise<IllustPagesResponse> {
     const url = `${WEB_API_URL}/illust/${id}/pages`;
 
     const response: IllustPagesResponse = await got
