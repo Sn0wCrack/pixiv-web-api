@@ -1,3 +1,5 @@
+import IllustType from "./IllustType";
+
 export interface BaseResponse {
   error?: boolean;
   message?: string;
@@ -20,7 +22,7 @@ export interface IllustDetailsResponse extends BaseResponse {
     id: string;
     title: string;
     description: string;
-    illustType: number;
+    illustType: IllustType;
     createdDate: string;
     uploadDate: string;
     urls: {
