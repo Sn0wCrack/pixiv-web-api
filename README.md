@@ -40,7 +40,7 @@ api.login({
 
 The value of this cookie field should be the value of the `PHPSESSID` cookie stored on pixiv.net.
 
-Please not that the account should not be accessed after this point, as the cookie could become invalid, if you do continue to access the cookie, you may need to rotate this value.
+**PLEASE NOTE**: If you continue to use the account / session that this cookie belongs to, you may need to rotate this value, as the session may become invalid from accessing it elsewhere. I would reccomend creating this session on a browser you don't normally use the associated account in normally for the best experience here.
 
 #### Password Authentication
 
