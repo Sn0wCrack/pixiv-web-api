@@ -1,4 +1,4 @@
-import IllustType from "./IllustType";
+import { IllustType } from './IllustType';
 
 export interface BaseResponse {
   error?: boolean;
