@@ -243,10 +243,10 @@ class PixivWeb {
     const session = new Cookie({
       key: 'PHPSESSID',
       value: this.sessionCookie,
-      domain: 'pixiv.net',
+      domain: '.pixiv.net',
       path: '/',
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
+      secure: true,
     });
 
     return [session];
