@@ -75,7 +75,6 @@ class PixivWeb {
     const result =
       body.includes('logout.php') ||
       body.includes('pixiv.user.loggedIn = true') ||
-      body.includes("_gaq.push(['_setCustomVar', 1, 'login', 'yes'") ||
       body.includes("var dataLayer = [{ login: 'yes',");
 
     if (result) {
@@ -136,10 +135,12 @@ class PixivWeb {
   }
 
   private async findUserId(body: string) {
-    const javascriptCheck = body.match(/pixiv\.user\.id = "(?<id>\d+)";/);
+    const spanCheck = body.match(
+      /<span id="qualtrics_user-id" hidden="">(?<id>\d+)<\/span>/
+    );
 
-    if (javascriptCheck) {
-      this.userId = javascriptCheck.groups?.id;
+    if (spanCheck) {
+      this.userId = spanCheck.groups?.id;
       return Promise.resolve();
     }
 
@@ -161,7 +162,7 @@ class PixivWeb {
       return Promise.resolve();
     }
 
-    return Promise.reject();
+    return Promise.reject('Failed to find Pixiv User ID');
   }
 
   async illustDetails(id: string | number): Promise<IllustDetailsResponse> {
@@ -245,8 +246,6 @@ class PixivWeb {
       value: this.sessionCookie,
       domain: '.pixiv.net',
       path: '/',
-      httpOnly: true,
-      secure: true,
     });
 
     return [session];
